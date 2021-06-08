@@ -1,4 +1,4 @@
-anode('core-agent'){
+node('core-agent'){
 	stage('SCM'){
 		checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/LjupcoKostic/JenkinsAgents']]])
 	}

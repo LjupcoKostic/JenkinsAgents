@@ -8,8 +8,6 @@ node('image-agent'){
 		dockerImage = docker.build('ljupchokostic/core-agent:v$BUILD_NUMBER');
 	}
 	stage('push'){
-		docker.withRegistry('https://index.docker.io/v1/', 'dockerhubcreds'){
-			dockerImage.push();
-		}
+		docker.withRegistry('https://index.docker.io/v1/', ''){dockerImage.push();}
 	}
 }

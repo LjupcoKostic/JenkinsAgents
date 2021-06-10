@@ -5,6 +5,11 @@ node('image-agent'){
 		checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/LjupcoKostic/JenkinsAgents']]]);
 	}
 	stage('build'){
-		sh 'docker image build - < buildCoreAgent.Dockerfile'
+		dockerImage = docker.build('ljupchokostic/core-agent:v$BUILD_NUMBER','buildCoreAgent.Dockerfile');
 	}	
+	stage('push'){
+		docker.withRegistry('https://index.docker.io/v1/', ''){
+			dockerImage.push();
+		}
+	}
 }

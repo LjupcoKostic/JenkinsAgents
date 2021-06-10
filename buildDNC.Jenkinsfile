@@ -6,8 +6,5 @@ node('image-agent'){
 	}
 	stage('build'){
 		sh 'docker image build - < buildCoreAgent.Dockerfile'
-	}
-	stage('push'){
-		docker.withRegistry('', ''){dockerImage.push();}
-	}
+	}	
 }
